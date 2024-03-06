@@ -10,6 +10,7 @@ const scrapeWebsite = async () => {
   await page.goto(url);
 
   const grabTables = await page.evaluate(() => {
+    // Helper function
     function toCamelCase(str) {
       // Replace special characters with a space and trim excess spaces
       str = str
@@ -36,36 +37,47 @@ const scrapeWebsite = async () => {
       return camelCaseString;
     }
 
-    let highPromoRate = [];
-    let highBaseRate = [];
-    let highBonusRate = [];
+    const usefulTables = 3;
+    let savingsRateData = [];
 
-    const tableTags = document.querySelector(
+    const tableTags = document.querySelectorAll(
       "div.table-responsive table tbody"
     );
 
-    // For each table tag
-    // for (let i = 0; i < 3; i++) {
-    // Extract features and convert to camelCase
-    let features = tableTags.children[0].innerText.split("\t");
-    for (let i = 0; i < features.length; i++) {
-      features[i] = toCamelCase(features[i]);
-    }
-    // }
+    // For each table
+    for (let i = 0; i < usefulTables; i++) {
+      let tempTableData = [];
 
-    // Extract table data
-    for (let i = 1; i < tableTags.children.length; i++) {
-      // Initialise object
-      let tempObj = {};
+      // Extract features and convert to camelCase
+      // table -> tr -> th.innerText
+      let features = tableTags[i].children[0].innerText.split("\t");
       for (let j = 0; j < features.length; j++) {
-        tempObj[features[j]] = tableTags.children[i].children[
-          j
-        ].innerText.replace("\n", " ");
+        features[j] = toCamelCase(features[j]);
       }
-      highPromoRate.push(tempObj);
+
+      // Extract table data
+      // For each rows
+      for (let j = 1; j < tableTags[i].children.length; j++) {
+        let tempObj = {};
+
+        // For each columns
+        for (let k = 0; k < features.length; k++) {
+          // table -> tr -> td.innerText
+          tempObj[features[k]] = tableTags[i].children[j].children[k].innerText
+            .replace(/\+/g, "")
+            .replace(/\n/g, " ")
+            .trim();
+        }
+
+        // Store each table data
+        tempTableData.push(tempObj);
+      }
+
+      // Store all tables data
+      savingsRateData.push(tempTableData);
     }
 
-    return highPromoRate;
+    return savingsRateData;
   });
 
   console.log(grabTables);
