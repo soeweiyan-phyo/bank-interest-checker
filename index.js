@@ -1,5 +1,6 @@
-const { read } = require("fs");
 const puppeteer = require("puppeteer");
+const notifier = require("node-notifier");
+
 const fs = require("fs").promises;
 
 // Best banks' interests comparison website
@@ -175,6 +176,11 @@ async function compareData() {
     }
 
     console.log("There have been no changes in the data.");
+    notifier.notify({
+      title: "Bank Interest Rate Checker",
+      message: "There have been no changes in the interest rate.",
+      sound: true,
+    });
   } catch (err) {
     console.error("Error: ", err);
   }
@@ -195,5 +201,13 @@ async function saveDataToFile() {
 function main() {
   compareData();
 }
+
+notifier.on("click", function (notifierObject, options, event) {
+  console.log("Notification clicked!");
+});
+
+notifier.on("close", function (notifierObject, options) {
+  console.log("Notification closed!");
+});
 
 main();
