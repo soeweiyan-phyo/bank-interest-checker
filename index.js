@@ -1,9 +1,9 @@
 const notifier = require("node-notifier");
 const fs = require("fs").promises;
 
-const scrapeCurrWebData = require("./scrapeCurrWebData");
-const readOldDataFile = require("./readOldDataFile");
-const compareData = require("./compareData");
+const scrapeCurrWebData = require("./src/scrapeCurrWebData");
+const readOldDataFile = require("./src/readOldDataFile");
+const compareData = require("./src/compareData");
 
 async function saveDataToFile() {
   try {
