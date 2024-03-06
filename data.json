@@ -1,0 +1,113 @@
+[
+  [
+    {
+      "provider": "Rabobank",
+      "account": "High Interest Savings Account",
+      "baseRate": "4.40%",
+      "promoRate": "1.35%",
+      "totalRate": "5.75%",
+      "promoPeriod": "4 months"
+    },
+    {
+      "provider": "Bank of China",
+      "account": "Online Saver",
+      "baseRate": "2.30%",
+      "promoRate": "3.20%",
+      "totalRate": "5.50%",
+      "promoPeriod": "3 months"
+    },
+    {
+      "provider": "Macquarie Bank",
+      "account": "Savings Account",
+      "baseRate": "4.75%",
+      "promoRate": "0.60%",
+      "totalRate": "5.35%",
+      "promoPeriod": "4 months"
+    },
+    {
+      "provider": "Easy Street Fin Services",
+      "account": "Easy Savings Online Account",
+      "baseRate": "2.00%",
+      "promoRate": "3.25%",
+      "totalRate": "5.25%",
+      "promoPeriod": "6 months"
+    },
+    {
+      "provider": "BCU Bank",
+      "account": "Bonus Saver",
+      "baseRate": "1.00%",
+      "promoRate": "4.20%",
+      "totalRate": "5.20%",
+      "promoPeriod": "4 months"
+    }
+  ],
+  [
+    {
+      "provider": "Australian Unity",
+      "account": "Freedom Saver",
+      "interestRate": "5.20%"
+    },
+    {
+      "provider": "ANZ",
+      "account": "ANZ Save Account (ANZ Plus*)",
+      "interestRate": "4.90%"
+    },
+    {
+      "provider": "BOQ",
+      "account": "Simple Saver",
+      "interestRate": "4.85%"
+    },
+    {
+      "provider": "Macquarie Bank",
+      "account": "Savings Account",
+      "interestRate": "4.75%"
+    },
+    {
+      "provider": "Unity Bank",
+      "account": "MoneyMAX Account",
+      "interestRate": "4.75%"
+    }
+  ],
+  [
+    {
+      "provider": "ME",
+      "account": "HomeME Savings Account",
+      "baseRate": "0.55%",
+      "bonusRate": "5.00%",
+      "totalRate": "5.55%",
+      "monthlyBonusConditions": "Deposit $2,000 into your SpendME account and grow your balance each month"
+    },
+    {
+      "provider": "",
+      "account": "Savings Maximiser",
+      "baseRate": "0.55%",
+      "bonusRate": "4.95%",
+      "totalRate": "5.50%",
+      "monthlyBonusConditions": "Deposit $1,000, make 5 purchases and grow your account each month"
+    },
+    {
+      "provider": "MOVE Bank",
+      "account": "Growth Saver",
+      "baseRate": "0.10%",
+      "bonusRate": "5.40%",
+      "totalRate": "5.50%",
+      "monthlyBonusConditions": "Deposit $200 and make no withdrawals monthly"
+    },
+    {
+      "provider": "AMP Bank",
+      "account": "AMP Saver Account",
+      "baseRate": "1.20%",
+      "bonusRate": "4.20%",
+      "totalRate": "5.40%",
+      "monthlyBonusConditions": "Deposit $1,000 each month"
+    },
+    {
+      "provider": "BOQ",
+      "account": "Future Saver 14-35 yrs old",
+      "baseRate": "0.05%",
+      "bonusRate": "5.35%",
+      "totalRate": "5.40%",
+      "monthlyBonusConditions": "Deposit $1,000 and make 5 transactions monthly"
+    }
+  ]
+]
