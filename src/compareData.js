@@ -2,15 +2,7 @@ const notifier = require("node-notifier");
 const fs = require("fs").promises;
 
 // Table names
-const tableNames = [
-  "highest promotional savings account rates",
-  "highest base savings account rates",
-  "highest bonus saving account rates",
-];
-
-// Best banks' interests comparison website
-const url =
-  "https://www.canstar.com.au/savings-accounts/best-savings-account-interest-rates/";
+const tableNames = ["promo rates", "base rates", "bonus rates"];
 
 var changedTable = [];
 
@@ -18,11 +10,11 @@ function notifyUser(isSame, message) {
   let finalMsg = "";
 
   if (!isSame && message === "") {
-    finalMsg += "There had been changes in the table(s): [";
+    finalMsg += "There had been changes in: [ ";
     for (let table of changedTable) {
       finalMsg += `${tableNames[table]}, `;
     }
-    finalMsg += `]. Go to the website to see the changes: ${url}`;
+    finalMsg += ` ]. Click to view the changes.`;
   } else {
     finalMsg = message;
   }

@@ -1,9 +1,13 @@
 const notifier = require("node-notifier");
 const fs = require("fs").promises;
+const { exec } = require("child_process");
 
 const scrapeCurrWebData = require("./src/scrapeCurrWebData");
 const readOldDataFile = require("./src/readOldDataFile");
 const compareData = require("./src/compareData");
+
+const url =
+  "https://www.canstar.com.au/savings-accounts/best-savings-account-interest-rates/";
 
 function saveData(currData) {
   try {
@@ -16,11 +20,19 @@ function saveData(currData) {
 }
 
 notifier.on("click", function (notifierObject, options, event) {
-  console.log("Notification clicked!");
-});
-
-notifier.on("close", function (notifierObject, options) {
-  console.log("Notification closed!");
+  if (!options.message.includes("no changes")) {
+    exec(`open "${url}"`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error opening URL: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.error(`Error opening URL: ${stderr}`);
+        return;
+      }
+      console.log(`URL opened successfully: ${url}`);
+    });
+  }
 });
 
 async function main() {
