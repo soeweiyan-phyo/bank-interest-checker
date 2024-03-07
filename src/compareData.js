@@ -8,25 +8,53 @@ const tableNames = [
   "highest bonus saving account rates",
 ];
 
+// Best banks' interests comparison website
+const url =
+  "https://www.canstar.com.au/savings-accounts/best-savings-account-interest-rates/";
+
+var changedTable = [];
+
+function notifyUser(isSame, message) {
+  let finalMsg = "";
+
+  if (!isSame && message === "") {
+    finalMsg += "There had been changes in the table(s): [";
+    for (let table of changedTable) {
+      finalMsg += `${tableNames[table]}, `;
+    }
+    finalMsg += `]. Go to the website to see the changes: ${url}`;
+  } else {
+    finalMsg = message;
+  }
+
+  console.log(finalMsg);
+  notifier.notify({
+    title: "Bank Interest Rate Checker",
+    message: finalMsg,
+    sound: true,
+    wait: true,
+  });
+}
+
 function compareRows(newRow, oldRow, i, j) {
   // Get keys for row objects
   const newKeys = Object.keys(newRow);
   const oldKeys = Object.keys(oldRow);
 
   if (newKeys.length !== oldKeys.length) {
-    console.log(`There has been changes in ${tableNames[i]}`);
+    changedTable.push(i);
     return false;
   }
 
   // Compare keys and values
   for (let key of newKeys) {
     if (!oldRow.hasOwnProperty(key)) {
-      console.log(`There has been changes in ${tableNames[i]}`);
+      changedTable.push(i);
       return false;
     }
 
     if (newRow[key] !== oldRow[key]) {
-      console.log(`There has been changes in ${tableNames[i]}`);
+      changedTable.push(i);
       return false;
     }
   }
@@ -36,33 +64,35 @@ function compareRows(newRow, oldRow, i, j) {
 
 const compareData = (currData, oldData) => {
   // TODO: Make sure tables order in current data is the same
+  let isSame = true;
 
   if (currData.length != oldData.length) {
-    console.log("Number of tables has changed.");
+    notifyUser(false, "The number of tables had changed.");
     return;
   }
 
   // For each table
   for (let i = 0; i < currData.length; i++) {
     if (currData[i].length !== oldData[i].length) {
-      console.log(`There has been changes in ${tableNames[i]}`);
+      isSame = false;
+      changedTable.push(i);
+      break;
     }
 
     // For each row
     for (let j = 0; j < currData[i].length; j++) {
       // Compare current and new rows
       if (!compareRows(currData[i][j], oldData[i][j], i, j)) {
-        return;
+        isSame = false;
+        break;
       }
     }
   }
 
-  console.log("There have been no changes in the data.");
-  notifier.notify({
-    title: "Bank Interest Rate Checker",
-    message: "There have been no changes in the interest rate.",
-    sound: true,
-  });
+  const msg = isSame ? "There are no changes in the interest rates." : "";
+  notifyUser(isSame, msg);
+
+  return isSame;
 };
 
 module.exports = compareData;

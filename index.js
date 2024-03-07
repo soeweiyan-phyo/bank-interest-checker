@@ -5,12 +5,10 @@ const scrapeCurrWebData = require("./src/scrapeCurrWebData");
 const readOldDataFile = require("./src/readOldDataFile");
 const compareData = require("./src/compareData");
 
-async function saveDataToFile() {
+function saveData(currData) {
   try {
-    const savingsRateData = await scrapeWebsite();
-    const jsonStr = JSON.stringify(savingsRateData, null, 2);
-
-    await fs.writeFile("data.json", jsonStr);
+    const jsonStr = JSON.stringify(currData, null, 2);
+    fs.writeFile("data.json", jsonStr);
     console.log("JSON file has been saved.");
   } catch (err) {
     console.error("An error occurred: ", err);
@@ -29,10 +27,15 @@ async function main() {
   const currData = await scrapeCurrWebData();
   const oldData = await readOldDataFile();
 
+  let isSame = true;
   if (currData !== null && oldData !== null) {
-    compareData(currData, oldData);
+    isSame = compareData(currData, oldData);
   } else {
     console.log("Error in getting the data.");
+  }
+
+  if (!isSame) {
+    saveData(currData);
   }
 }
 
