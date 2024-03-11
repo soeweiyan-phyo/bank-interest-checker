@@ -6,6 +6,7 @@ const tableNames = ["promo rates", "base rates", "bonus rates"];
 
 var changedTable = [];
 
+// TODO refactor this
 function notifyUser(isSame, message) {
   let finalMsg = "";
 
@@ -28,6 +29,7 @@ function notifyUser(isSame, message) {
   });
 }
 
+// TODO remove j
 function compareRows(newRow, oldRow, i, j) {
   // Get keys for row objects
   const newKeys = Object.keys(newRow);
